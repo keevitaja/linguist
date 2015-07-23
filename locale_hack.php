@@ -9,17 +9,15 @@
 |
 */
 
-/*
- * Make sure you have locales described in config also
- */
-$pattern = '/^\/(en|fr|et)\//';
+$config = include 'resources/config/linguist.php';
 
-$URI = $_SERVER['REQUEST_URI'];
+$pattern = '/^\/('.implode('|', $config['locales']).')\//';
+$uri = $_SERVER['REQUEST_URI'];
 
-if (preg_match($pattern, $URI, $matches)) {
-    $URI = preg_replace($pattern, '/', $URI);
+if (preg_match($pattern, $uri, $matches)) {
+    $uri = preg_replace($pattern, '/', $uri);
 
-    $_SERVER['REQUEST_URI'] = $URI;
+    $_SERVER['REQUEST_URI'] = $uri;
 
     define('LOCALE', $matches[1]);
 }
