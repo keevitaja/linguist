@@ -1,0 +1,24 @@
+{
+    "name": "keevitaja/linguist",
+    "description": "Multilingual environment for Laravel framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tanel Tammik",
+            "email": "keevitaja@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.0"
+    },
+    "require-dev": {
+    
+    },
+    "autoload": {
+        "psr-4": {
+        "Keevitaja\\Linguist\\": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
