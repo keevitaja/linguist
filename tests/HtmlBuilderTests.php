@@ -1,6 +1,6 @@
 <?php
 
-class HtmlBuilderTest extends TestCase 
+class HtmlBuilderTest extends Orchestra\Testbench\TestCase 
 {
     public function setUp()
     {
@@ -12,6 +12,7 @@ class HtmlBuilderTest extends TestCase
 
         $this->config->set('app.locale', 'en');
         $this->config->set('linguist.default', 'en');
+        $this->config->set('linguist.locales', ['en', 'fr', 'et']);
     }
 
     public function test_link_to_hide_default_false()
