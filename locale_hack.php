@@ -26,5 +26,5 @@ if (preg_match($pattern, $URI, $matches)) {
     /*
      * If match was not found, use default locale
      */
-    define('LOCALE', 'et');
+    define('LOCALE', 'en');
 }
