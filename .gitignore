@@ -2,3 +2,5 @@
 .env.*.php
 .env.php
 .env
+linguist.sublime-project
+linguist.sublime-workspace

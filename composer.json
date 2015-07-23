@@ -15,6 +15,9 @@
     "autoload": {
         "psr-4": {
             "Keevitaja\\Linguist\\": "src/"
-        }
+        },
+        "files": [
+          "src/helpers.php"
+        ]
     }
 }
