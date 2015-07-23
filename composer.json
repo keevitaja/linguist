@@ -16,6 +16,5 @@
         "psr-4": {
             "Keevitaja\\Linguist\\": "src/"
         }
-    },
-    "minimum-stability": "stable"
+    }
 }
