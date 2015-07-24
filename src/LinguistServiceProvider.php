@@ -31,5 +31,13 @@ class LinguistServiceProvider extends ServiceProvider
             'app.locale', 
             defined('LOCALE') ? LOCALE : config('linguist.default')
         );
+
+        $this->app->bind('linguist', function() {
+            return $this->app->make('Keevitaja\Linguist\Linguist');
+        });
+
+        $this->app->bind('linguisthtmlbuilder', function() {
+            return $this->app->make('Keevitaja\Linguist\HtmlBuilder');
+        });
     }
 }
