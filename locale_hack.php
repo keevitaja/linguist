@@ -9,20 +9,23 @@
 |
 */
 
-function removeLocaleSlugFromRequestUri()
+class RemoveLocaleSlugFromRequestUri
 {
-    $config = include 'resources/config/linguist.php';
+    function remove()
+    {
+        $config = include 'resources/config/linguist.php';
 
-    $pattern = '/^\/('.implode('|', $config['locales']).')\//';
-    $uri = $_SERVER['REQUEST_URI'];
+        $pattern = '/^\/('.implode('|', $config['locales']).')\//';
+        $uri = $_SERVER['REQUEST_URI'];
 
-    if (preg_match($pattern, $uri, $matches)) {
-        $uri = preg_replace($pattern, '/', $uri);
+        if (preg_match($pattern, $uri, $matches)) {
+            $uri = preg_replace($pattern, '/', $uri);
 
-        $_SERVER['REQUEST_URI'] = $uri;
+            $_SERVER['REQUEST_URI'] = $uri;
 
-        define('LOCALE', $matches[1]);
+            define('LOCALE', $matches[1]);
+        }
     }
 }
 
-removeLocaleSlugFromRequestUri();
+(new RemoveLocaleSlugFromRequestUri())->remove();
