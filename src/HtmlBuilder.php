@@ -37,7 +37,7 @@ class HtmlBuilder
     }
 
     /**
-     * Generate HTML link
+     * Generate HTML anchor tag
      *
      * @param  string $url
      * @param  string $title
