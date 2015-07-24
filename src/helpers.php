@@ -1,6 +1,6 @@
 <?php
 
-if ( ! function_exists('link_to')) {
+if ( ! function_exists('lnk_to')) {
     /**
      * Generate localized HTML anchor tag
      *
@@ -11,7 +11,7 @@ if ( ! function_exists('link_to')) {
      *
      * @return string
      */
-    function link_to($uri, $title, $attributes = [], $slug = false)
+    function lnk_to($uri, $title, $attributes = [], $slug = false)
     {
         return app('Keevitaja\Linguist\HtmlBuilder')
             ->linkTo($uri, $title, $attributes = [], $slug = false);
@@ -21,7 +21,7 @@ if ( ! function_exists('link_to')) {
 /*
  * Generate html link to route
  */
-if ( ! function_exists('link_to_route')) {
+if ( ! function_exists('lnk_to_route')) {
     /**
      * Generate localized HTML anchor tag to named route
      *
@@ -33,7 +33,7 @@ if ( ! function_exists('link_to_route')) {
      *
      * @return string
      */
-    function link_to_route($name, $title, $parameters = [], $attributes = [], $slug = false)
+    function lnk_to_route($name, $title, $parameters = [], $attributes = [], $slug = false)
     {
         return app('Keevitaja\Linguist\HtmlBuilder')
             ->linkToRoute($name, $title, $parameters, $attributes = [], $slug = false);
