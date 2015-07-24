@@ -84,7 +84,9 @@ class Linguist
     {
         $slug = $this->validatedSlug($slug);
 
-        if ($this->isHidden($slug)) return $uri;
+        if ($this->isHidden($slug)) {
+            return $uri;
+        }
 
         return $slug.'/'.ltrim($uri, '/');
     }
