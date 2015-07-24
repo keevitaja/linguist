@@ -2,19 +2,11 @@
 
 namespace Keevitaja\Linguist;
 
-use Illuminate\Config\Repository;
 use Illuminate\Routing\UrlGenerator;
 use Keevitaja\Linguist\InvalidLocaleException;
 
 class Linguist
 {
-    /**
-     * Config Repository
-     *
-     * @var object
-     */
-    protected $config;
-
     /**
      * Url Generator
      *
@@ -22,9 +14,8 @@ class Linguist
      */
     protected $url;
 
-    public function __construct(Repository $config, UrlGenerator $url)
+    public function __construct(UrlGenerator $url)
     {
-        $this->config = $config;
         $this->url = $url;
     }
 
@@ -59,12 +50,10 @@ class Linguist
     {
         $slug = $slug ?: $this->workingLocale();
 
-        $locales = config('linguist.locales');
-
         /*
          * Throw exception if i18n slug is not found in config locales array
          */
-        if ( ! in_array($slug, $locales)) {
+        if ( ! in_array($slug, config('linguist.locales'))) {
             throw new InvalidLocaleException('Locale slug ['.$slug.'] not configured!');
         }
 
@@ -80,9 +69,7 @@ class Linguist
      */
     public function isHidden($slug)
     {
-        $hide = config('linguist.hide_default');
-
-        return $hide AND $this->defaultLocale() == $slug;
+        return config('linguist.hide_default') AND $this->defaultLocale() == $slug;
     }
 
     /**
