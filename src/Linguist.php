@@ -3,19 +3,11 @@
 namespace Keevitaja\Linguist;
 
 use Illuminate\Config\Repository;
-use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Keevitaja\Linguist\InvalidLocaleException;
 
 class Linguist
 {
-    /**
-     * Http Request
-     *
-     * @var object
-     */
-    protected $request;
-
     /**
      * Config Repository
      *
@@ -30,9 +22,8 @@ class Linguist
      */
     protected $url;
 
-    public function __construct(Request $request, Repository $config, UrlGenerator $url)
+    public function __construct(Repository $config, UrlGenerator $url)
     {
-        $this->request = $request;
         $this->config = $config;
         $this->url = $url;
     }
@@ -74,7 +65,7 @@ class Linguist
          * Throw exception if i18n slug is not found in config locales array
          */
         if ( ! in_array($slug, $locales)) {
-            throw new InvalidLocaleException('Locale slug [' . $slug . '] not configured!');
+            throw new InvalidLocaleException('Locale slug ['.$slug.'] not configured!');
         }
 
         return $slug;
@@ -87,7 +78,7 @@ class Linguist
      *
      * @return boolean
      */
-    protected function isHidden($slug)
+    public function isHidden($slug)
     {
         $hide = $this->config->get('linguist.hide_default');
 
@@ -95,7 +86,7 @@ class Linguist
     }
 
     /**
-     * Prepend i18n slug to uri
+     * Prepend i18n slug to URI
      *
      * @param  string  $uri
      * @param  boolean $slug
@@ -112,44 +103,46 @@ class Linguist
     }
 
     /**
-     * Prepend i18n slug to uri and return url
+     * Generate localized URL from URI
      *
      * @param  string  $uri
+     * @param  array   $extra
+     * @param  mixed  $secure
      * @param  boolean $slug
      *
      * @return string
      */
-    public function url($uri, $slug = false)
-    {
-        $uri = $this->uri($uri, $slug);
-        $root = $this->request->root();
-
-        return $root.'/'.$uri;
+    public function url($uri, $extra = [], $secure = null, $slug = false)
+    {   
+        return $this->url->to($this->uri($uri, $slug), $extra, $secure);
     }
 
     /**
-     * Prepend i18n slug to route
+     * Generate localized URL from named route
      *
      * @param  string  $name
      * @param  array   $parameters
+     * @param  array   $extra
+     * @param  mixed   $secure
      * @param  boolean $slug
      *
      * @return string
      */
-    public function route($name, $parameters = [], $slug = false)
-    {
+    public function route(
+        $name,
+        $parameters = [],
+        $extra = [],
+        $secure = null, 
+        $slug = false
+    ) {
         $slug = $this->validatedSlug($slug);
 
-        $url = $this->url->route($name, $parameters);
-
         if ($this->isHidden($slug)) {
-            return $url;
+            return $this->url->route($name, $parameters);
         }
 
-        $root = $this->request->root();
+        $uri = $slug.$this->url->route($name, $parameters, false);
 
-        $uri = ltrim(str_replace($root, '', $url), '/');
-
-        return $root.'/'.$slug.'/'.$uri;
+        return $this->url->to($uri, $extra, $secure);
     }
 }

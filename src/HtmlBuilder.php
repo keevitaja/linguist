@@ -48,6 +48,7 @@ class HtmlBuilder
     protected function link($url, $title, $attributes = [])
     {
         $attributes = $this->parseAttributes($attributes);
+        $title = empty(trim($title)) ? $url : $title;
 
         return '<a href="'.$url.'" '.$attributes.'>'.$title.'</a>';
     }
@@ -58,13 +59,21 @@ class HtmlBuilder
      * @param  string  $uri
      * @param  string  $title
      * @param  array   $attributes
+     * @param  array   $extra
+     * @param  mixed  $secure
      * @param  boolean $slug
      *
      * @return string
      */
-    public function linkTo($uri, $title, $attributes = [], $slug = false)
-    {
-        $url = $this->linguist->url($uri, $slug);
+    public function linkTo(
+        $uri,
+        $title,
+        $attributes = [],
+        $extra = [],
+        $secure = null,
+        $slug = false
+    ) {
+        $url = $this->linguist->url($uri, $extra, $secure, $slug);
 
         return $this->link($url, $title, $attributes);
     }
@@ -80,9 +89,16 @@ class HtmlBuilder
      *
      * @return string
      */
-    public function linkToRoute($name, $title, $parameters = [], $attributes = [], $slug = false)
-    {
-        $url = $this->linguist->route($name, $parameters, $slug);
+    public function linkToRoute(
+        $name,
+        $title,
+        $parameters = [],
+        $attributes = [],
+        $extra = [],
+        $secure = null,
+        $slug = false
+    ) {
+        $url = $this->linguist->route($name, $parameters, $extra, $secure, $slug);
 
         return $this->link($url, $title, $attributes);
     }
