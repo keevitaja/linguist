@@ -15,5 +15,5 @@ return [
     /*
      * Default i18n locale slug
      */
-    'default' => 'en'
+    'default' => 'fr'
 ];

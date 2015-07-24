@@ -35,7 +35,7 @@ class Linguist
      */
     public function defaultLocale()
     {
-        return $this->config->get('linguist.default');
+        return config('linguist.default');
     }
 
     /**
@@ -59,7 +59,7 @@ class Linguist
     {
         $slug = $slug ?: $this->workingLocale();
 
-        $locales = $this->config->get('linguist.locales');
+        $locales = config('linguist.locales');
 
         /*
          * Throw exception if i18n slug is not found in config locales array
@@ -80,7 +80,7 @@ class Linguist
      */
     public function isHidden($slug)
     {
-        $hide = $this->config->get('linguist.hide_default');
+        $hide = config('linguist.hide_default');
 
         return $hide AND $this->defaultLocale() == $slug;
     }
