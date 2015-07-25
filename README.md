@@ -77,15 +77,15 @@ Linguist is very easy to use. The locale slug is removed from the REQUEST_URI le
 
 Linguist uses Laravel [UrlGenerator](http://laravel.com/api/5.1/Illuminate/Routing/UrlGenerator.html#method_to) for the URL generation.
 
-### Routes & URLs
+### Routing
 
-Linguist hides locale slug from the framework. Because of that, describing routes is done as it would be normally:
+Linguist hides locale slug from the framework. Because of that routing is done as it would be normally:
 
 ```php
 Route::get('about', 'AboutController@index');
 ```
 
-The route above will catch both `http://site.com/about`, `http://site.com/en/about` and `http://site.com/et/about` URLs. URL without a locale slug is treated as a default locale.
+The route above will catch both `http://site.com/about`, `http://site.com/en/about` and `http://site.com/et/about`. URL without a locale slug is treated as a default locale.
 
 Sometimes there is a need for translated URLs: for the English content `http://site.com/en/people` and for the French content `http://site.com/fr/personnes` . 
 
