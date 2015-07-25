@@ -1,6 +1,7 @@
 {
     "name": "keevitaja/linguist",
     "description": "Multilingual environment for Laravel framework",
+    "keywords": ["localization", "i18n", "multilingual", "laravel", "php"],
     "license": "MIT",
     "version": "0.1.0",
     "authors": [
