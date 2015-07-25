@@ -10,7 +10,7 @@ Read more about the approach and package from [keevitaja.com](http://keevitaja.c
 Install using composer
 
 ```
-composer require "keevitaja/linguist=~0.1"
+"keevitaja/linguist": "0.1.*"
 ```
 
 Add service provider to `config/app.php`
