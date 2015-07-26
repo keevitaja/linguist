@@ -3,7 +3,7 @@
 
 This package provides an easy localization support for the Laravel framework.
 
-Read more about the approach and package from [keevitaja.com](http://keevitaja.com/2015/26/multilingual-laravel-applications-right-way) blog.
+Read more about the approach and package from [keevitaja.com](http://keevitaja.com/2015/07/multilingual-laravel-applications-right-way) blog.
 
 ## Installation
 
