@@ -124,14 +124,8 @@ class Linguist
         $secure = null, 
         $slug = false
     ) {
-        $slug = $this->validatedSlug($slug);
+        $uri = $this->url->route($name, $parameters, false);
 
-        if ($this->isHidden($slug)) {
-            return $this->url->route($name, $parameters);
-        }
-
-        $uri = $slug.$this->url->route($name, $parameters, false);
-
-        return $this->url->to($uri, $extra, $secure);
+        return $this->url($uri, $extra, $secure, $slug);
     }
 }
