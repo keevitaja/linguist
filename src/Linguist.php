@@ -36,7 +36,7 @@ class Linguist
      */
     public function workingLocale()
     {
-        return defined('LOCALE') ? LOCALE : $this->defaultLocale();
+        return config('app.locale');
     }
 
     /**
