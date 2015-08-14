@@ -1,6 +1,6 @@
 <?php
 
-namespace Keevitaja\Linguist;
+namespace Keevitaja\Linguist\Exceptions;
 
 use Exception;
 

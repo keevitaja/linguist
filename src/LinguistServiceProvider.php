@@ -14,7 +14,7 @@ class LinguistServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../resources/config/linguist.php' => config_path('linguist.php'),
+            __DIR__.'/../config/linguist.php' => config_path('linguist.php'),
         ], 'config');
     }
 
@@ -25,18 +25,18 @@ class LinguistServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../resources/config/linguist.php', 'linguist');
+        $this->mergeConfigFrom(__DIR__.'/../config/linguist.php', 'linguist');
 
         $locale = defined('LOCALE') ? LOCALE : $this->app->config->get('linguist.default');
 
         $this->app->config->set('app.locale', $locale);
 
         $this->app->bind('linguist', function() {
-            return $this->app->make('Keevitaja\Linguist\Linguist');
+            return $this->app->make('Keevitaja\Linguist\Services\Linguist');
         });
 
         $this->app->bind('linguisthtmlbuilder', function() {
-            return $this->app->make('Keevitaja\Linguist\HtmlBuilder');
+            return $this->app->make('Keevitaja\Linguist\Services\HtmlBuilder');
         });
     }
 }

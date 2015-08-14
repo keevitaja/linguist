@@ -1,8 +1,8 @@
 <?php
 
-namespace Keevitaja\Linguist;
+namespace Keevitaja\Linguist\Services;
 
-use Keevitaja\Linguist\Linguist;
+use Keevitaja\Linguist\Services\Linguist;
 
 class HtmlBuilder
 {

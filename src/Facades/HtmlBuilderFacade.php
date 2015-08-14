@@ -1,6 +1,6 @@
 <?php
 
-namespace Keevitaja\Linguist;
+namespace Keevitaja\Linguist\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

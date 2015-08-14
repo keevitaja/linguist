@@ -10,7 +10,7 @@ Read more about the approach and package from [keevitaja.com](http://keevitaja.c
 Install using composer
 
 ```
-"keevitaja/linguist": "0.1.*"
+"keevitaja/linguist": "1.0.*"
 ```
 
 Add service provider to `config/app.php`
@@ -26,19 +26,17 @@ Add aliases to `config/app.php`
 'LinguistHtml'  => Keevitaja\Linguist\HtmlBuilderFacade::class
 ```
 
-Require `uri_mod.php` in `public/index.php` at the beginning
+Swap `HttpKernel` in `app/Http/Kernel.php`
 
 ```php
 <?php
 
-require_once '../vendor/keevitaja/linguist/uri_mod.php';
+namespace App\Http;
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylorotwell@gmail.com>
- */
+//use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Keevitaja\Linguist\Http\Kernel as HttpKernel;
+
+class Kernel extends HttpKernel
 ```
 
 Publish configuration file to `config/`

@@ -21,7 +21,7 @@ if ( ! function_exists('lnk_to')) {
         $secure = null,
         $slug = false
     ) {
-        return app('Keevitaja\Linguist\HtmlBuilder')
+        return app('Keevitaja\Linguist\Services\HtmlBuilder')
             ->linkTo($uri, $title, $attributes, $extra, $secure, $slug);
     }
 }
@@ -47,7 +47,7 @@ if ( ! function_exists('lnk_to_route')) {
         $secure = null,
         $slug = false
     ) {
-        return app('Keevitaja\Linguist\HtmlBuilder')
+        return app('Keevitaja\Linguist\Services\HtmlBuilder')
             ->linkToRoute($name, $title, $parameters, $attributes, $extra, $secure, $slug);
     }
 }
