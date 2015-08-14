@@ -1,6 +1,6 @@
 <?php
 
-namespace Keevitaja\Linguist;
+namespace Keevitaja\Linguist\Services;
 
 use Illuminate\Routing\UrlGenerator;
 use Keevitaja\Linguist\InvalidLocaleException;

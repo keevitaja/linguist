@@ -10,7 +10,7 @@ Read more about the approach and package from [keevitaja.com](http://keevitaja.c
 Install using composer
 
 ```
-"keevitaja/linguist": "0.1.*"
+"keevitaja/linguist": "1.0.*"
 ```
 
 Add service provider to `config/app.php`
@@ -22,23 +22,21 @@ Keevitaja\Linguist\LinguistServiceProvider::class
 Add aliases to `config/app.php`
 
 ```php
-'Linguist'  => Keevitaja\Linguist\LinguistFacade::class,
-'LinguistHtml'  => Keevitaja\Linguist\HtmlBuilderFacade::class
+'Linguist'  => Keevitaja\Linguist\Facades\LinguistFacade::class,
+'LinguistHtml'  => Keevitaja\Linguist\Facades\HtmlBuilderFacade::class
 ```
 
-Require `uri_mod.php` in `public/index.php` at the beginning
+Swap `HttpKernel` in `app/Http/Kernel.php`
 
 ```php
 <?php
 
-require_once '../vendor/keevitaja/linguist/uri_mod.php';
+namespace App\Http;
 
-/**
- * Laravel - A PHP Framework For Web Artisans
- *
- * @package  Laravel
- * @author   Taylor Otwell <taylorotwell@gmail.com>
- */
+//use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Keevitaja\Linguist\Http\Kernel as HttpKernel;
+
+class Kernel extends HttpKernel
 ```
 
 Publish configuration file to `config/`
@@ -96,7 +94,7 @@ Route::get('people', 'PeopleController@index');
 Route::get('personnes', 'PeopleController@index');
 ```
 
-### Keevitaja\Linguist\Linguist
+### Keevitaja\Linguist\Services\Linguist
 
 Provides locale information and generates localized URLs.
 
@@ -188,7 +186,7 @@ public function route(
 )
 ```
 
-### Keevitaja\Linguist\HtmlBuilder
+### Keevitaja\Linguist\Services\HtmlBuilder
 
 Generates localized HTML anchor tags
 
@@ -317,8 +315,8 @@ Linguist also comes with Facades
 
 ```
 
-Linguist => Keevitaja\Linguist\Linguist
-LinguistHtml => Keevitaja\Linguist\HtmlBuilder
+Linguist => Keevitaja\Linguist\Services\Linguist
+LinguistHtml => Keevitaja\Services\Linguist\HtmlBuilder
 ```
 
 ## Examples
