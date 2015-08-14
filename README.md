@@ -22,8 +22,8 @@ Keevitaja\Linguist\LinguistServiceProvider::class
 Add aliases to `config/app.php`
 
 ```php
-'Linguist'  => Keevitaja\Linguist\LinguistFacade::class,
-'LinguistHtml'  => Keevitaja\Linguist\HtmlBuilderFacade::class
+'Linguist'  => Keevitaja\Linguist\Facades\LinguistFacade::class,
+'LinguistHtml'  => Keevitaja\Linguist\Facades\HtmlBuilderFacade::class
 ```
 
 Swap `HttpKernel` in `app/Http/Kernel.php`
@@ -94,7 +94,7 @@ Route::get('people', 'PeopleController@index');
 Route::get('personnes', 'PeopleController@index');
 ```
 
-### Keevitaja\Linguist\Linguist
+### Keevitaja\Linguist\Services\Linguist
 
 Provides locale information and generates localized URLs.
 
@@ -186,7 +186,7 @@ public function route(
 )
 ```
 
-### Keevitaja\Linguist\HtmlBuilder
+### Keevitaja\Linguist\Services\HtmlBuilder
 
 Generates localized HTML anchor tags
 
@@ -315,8 +315,8 @@ Linguist also comes with Facades
 
 ```
 
-Linguist => Keevitaja\Linguist\Linguist
-LinguistHtml => Keevitaja\Linguist\HtmlBuilder
+Linguist => Keevitaja\Linguist\Services\Linguist
+LinguistHtml => Keevitaja\Services\Linguist\HtmlBuilder
 ```
 
 ## Examples
