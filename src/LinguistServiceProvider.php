@@ -25,6 +25,8 @@ class LinguistServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/linguist.php', 'linguist');
+
         $locale = defined('LOCALE') ? LOCALE : $this->app->config->get('linguist.default');
 
         $this->app->config->set('app.locale', $locale);
