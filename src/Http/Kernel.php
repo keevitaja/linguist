@@ -27,7 +27,16 @@ class Kernel extends HttpKernel
      */
     public function defineLocale()
     {
-        $config = include __DIR__.'/../../config/linguist.php';
+        $config = [
+            'default' => __DIR__.'/../../config/linguist.php',
+            'published' => base_path('config/linguist.php')
+        ];
+
+        if (file_exists($config['published'])) {
+            $config = include $config['published'];
+        } else {
+            $config = include $config['default'];
+        }
 
         $pattern = '/^\/('.implode('|', $config['locales']).')(?:\/|$)/';
 
