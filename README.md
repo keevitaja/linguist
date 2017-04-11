@@ -85,7 +85,7 @@ Route::get('about', 'AboutController@index');
 
 The route above will catch both `http://site.com/about`, `http://site.com/en/about` and `http://site.com/et/about`. URL without a locale slug is treated as a default locale.
 
-Sometimes there is a need for translated URLs: for the English content `http://site.com/en/people` and for the French content `http://site.com/fr/personnes` . 
+Sometimes there is a need for translated URLs: for the English content `http://site.com/en/people` and for the French content `http://site.com/fr/personnes` .
 
 With Linguist no extra configuration is need. Just create two routes with identical destinations:
 
@@ -181,7 +181,7 @@ public function route(
     $name,
     $parameters = [],
     $extra = [],
-    $secure = null, 
+    $secure = null,
     $slug = false
 )
 ```
@@ -275,7 +275,7 @@ There are available helpers for HTML tag generation.
  * @return string
  */
 function lnk_to(
-    $uri, 
+    $uri,
     $title,
     $attributes = [],
     $extra = [],
@@ -363,4 +363,4 @@ If this repository gets more than 50 stars, i will pledge myself to maintain it 
 
 
 
- 
+

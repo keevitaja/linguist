@@ -16,7 +16,7 @@ class Kernel extends HttpKernel
     public function __construct(Application $app, Router $router)
     {
         $this->defineLocale();
-        
+
         parent::__construct($app, $router);
     }
 

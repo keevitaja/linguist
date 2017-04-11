@@ -14,7 +14,7 @@ if ( ! function_exists('lnk_to')) {
      * @return string
      */
     function lnk_to(
-        $uri, 
+        $uri,
         $title,
         $attributes = [],
         $extra = [],

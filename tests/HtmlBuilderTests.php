@@ -1,6 +1,6 @@
 <?php
 
-class HtmlBuilderTest extends Orchestra\Testbench\TestCase 
+class HtmlBuilderTest extends Orchestra\Testbench\TestCase
 {
     public function setUp()
     {
@@ -43,7 +43,7 @@ class HtmlBuilderTest extends Orchestra\Testbench\TestCase
         $this->config->set('linguist.hide_default', false);
 
         app('router')->get('test/this/route', ['as' => 'named.route', function() {}]);
-        
+
         $attributes = ['class' => 'some-class'];
         $linkFromBuilder = lnk_to_route('named.route', 'Some Title', [], $attributes);
         $linkToTestAgainst = '<a class="some-class" href="http://keevitaja.com/en/test/this/route">Some Title</a>';
@@ -56,7 +56,7 @@ class HtmlBuilderTest extends Orchestra\Testbench\TestCase
         $this->config->set('linguist.hide_default', true);
 
         app('router')->get('test/this/route', ['as' => 'named.route', function() {}]);
-        
+
         $attributes = ['class' => 'some-class'];
         $linkFromBuilder = lnk_to_route('named.route', 'Some Title', [], $attributes);
         $linkToTestAgainst = '<a class="some-class" href="http://keevitaja.com/test/this/route">Some Title</a>';
@@ -70,7 +70,7 @@ class HtmlBuilderTest extends Orchestra\Testbench\TestCase
         $this->url->forceRootUrl('https://keevitaja.com');
 
         app('router')->get('test/show/{test}', ['as' => 'test.show', function() {}]);
-        
+
         $attributes = ['class' => 'test'];
         $linkFromBuilder = lnk_to_route('test.show', 'nimetus', [3], $attributes, [], true);
         $linkToTestAgainst = '<a class="test" href="https://keevitaja.com/en/test/show/3">nimetus</a>';

@@ -77,7 +77,7 @@ class Linguist
      *
      * @param  string  $uri
      * @param  mixed $slug
-     *         
+     *
      * @return string
      */
     public function uri($uri, $slug = false)
@@ -121,7 +121,7 @@ class Linguist
         $name,
         $parameters = [],
         $extra = [],
-        $secure = null, 
+        $secure = null,
         $slug = false
     ) {
         $uri = $this->url->route($name, $parameters, false);
