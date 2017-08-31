@@ -25,5 +25,16 @@
           "src/helpers.php"
         ]
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Keevitaja\\Linguist\\LinguistServiceProvider"
+            ],
+            "aliases": {
+                "Linguist": "Keevitaja\\Linguist\\Facades\\LinguistFacade",
+                "LinguistHtml": "Keevitaja\\Linguist\\Facades\\HtmlBuilderFacade"
+            }
+        }
+    },
     "minimum-stability": "dev"
 }
