@@ -3,7 +3,7 @@
     "description": "Easy localization for the Laravel framework",
     "keywords": ["localization", "i18n", "multilingual", "laravel", "php"],
     "license": "MIT",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "authors": [
         {
             "name": "Tanel Tammik",
