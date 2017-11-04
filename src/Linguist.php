@@ -10,8 +10,6 @@ use Illuminate\Support\Str;
 
 class Linguist
 {
-    protected $enabled = false;
-
     protected $current;
 
     protected $config;
@@ -34,11 +32,6 @@ class Linguist
         return $this->current;
     }
 
-    public function enable()
-    {
-        $this->enabled = true;
-    }
-
     public function enabled()
     {
         return $this->config['enabled'];
@@ -53,11 +46,6 @@ class Linguist
         if ($this->shouldLocalize()) {
             $this->url->forceRootUrl($this->request->root().'/'.$locale);
         }
-    }
-
-    public function disable()
-    {
-        $this->enabled = false;
     }
 
     public function hasDefaultSlug()
@@ -86,39 +74,8 @@ class Linguist
         return $this->config['deny_default'];
     }
 
-    public function isEnabled()
-    {
-        return $this->enabled;
-    }
-
     public function shouldLocalize($locale = null)
     {
-        if ( ! $this->isEnabled()) {
-            return false;
-        }
-
         return ! $this->isDefault($locale) || ! $this->isDefaultHidden();
     }
-
-    // public function switcher()
-    // {
-    //     $urls = [];
-    //     $enabled = $this->enabled;
-    //     $this->enabled = true;
-    //     $uri = str_replace($this->request->root(), '', url()->full());
-
-    //     foreach ($this->config['enabled'] as $locale) {
-    //         $root = $this->request->root();
-
-    //         if ($this->shouldLocalize($locale)) {
-    //             $root .= '/'.$locale;
-    //         }
-
-    //         $urls[$locale] = $root.$uri;
-    //     }
-
-    //     $this->enabled = $enabled;
-
-    //     return collect($urls);
-    // }
 }

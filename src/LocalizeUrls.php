@@ -20,7 +20,6 @@ class LocalizeUrls
             abort(404);
         }
 
-        $this->linguist->enable();
         $this->linguist->localize();
 
         return $next($request);
