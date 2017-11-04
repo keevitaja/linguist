@@ -2,8 +2,8 @@
 
 namespace Keevitaja\Linguist;
 
-use App\Features\Linguist;
 use Closure;
+use Keevitaja\Linguist\Linguist;
 
 class LocalizeUrls
 {
@@ -21,6 +21,7 @@ class LocalizeUrls
         }
 
         $this->linguist->enable();
+        $this->linguist->localize();
 
         return $next($request);
     }

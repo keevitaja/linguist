@@ -2,6 +2,8 @@
 
 namespace Keevitaja\Linguist;
 
+use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Str;
@@ -16,12 +18,15 @@ class Linguist
 
     protected $request;
 
-    public function __construct(UrlGenerator $url, Request $request)
+    protected $app;
+
+    public function __construct(UrlGenerator $url, Request $request, Application $app, Config $config)
     {
         $this->current = env('LOCALE');
-        $this->config = config('localization');
+        $this->config = $config->get('linguist');
         $this->url = $url;
         $this->request = $request;
+        $this->app = $app;
     }
 
     public function current()
@@ -29,12 +34,21 @@ class Linguist
         return $this->current;
     }
 
-    public function enable($locale = null)
+    public function enable()
     {
         $this->enabled = true;
+    }
+
+    public function enabled()
+    {
+        return $this->config['enabled'];
+    }
+
+    public function localize($locale = null)
+    {
         $locale = is_null($locale) ? $this->current : $locale;
 
-        app()->setLocale($locale);
+        $this->app->setLocale($locale);
 
         if ($this->shouldLocalize()) {
             $this->url->forceRootUrl($this->request->root().'/'.$locale);
@@ -86,25 +100,25 @@ class Linguist
         return ! $this->isDefault($locale) || ! $this->isDefaultHidden();
     }
 
-    public function switcher()
-    {
-        $urls = [];
-        $enabled = $this->enabled;
-        $this->enabled = true;
-        $uri = str_replace($this->request->root(), '', url()->full());
+    // public function switcher()
+    // {
+    //     $urls = [];
+    //     $enabled = $this->enabled;
+    //     $this->enabled = true;
+    //     $uri = str_replace($this->request->root(), '', url()->full());
 
-        foreach ($this->config['enabled'] as $locale) {
-            $root = $this->request->root();
+    //     foreach ($this->config['enabled'] as $locale) {
+    //         $root = $this->request->root();
 
-            if ($this->shouldLocalize($locale)) {
-                $root .= '/'.$locale;
-            }
+    //         if ($this->shouldLocalize($locale)) {
+    //             $root .= '/'.$locale;
+    //         }
 
-            $urls[$locale] = $root.$uri;
-        }
+    //         $urls[$locale] = $root.$uri;
+    //     }
 
-        $this->enabled = $enabled;
+    //     $this->enabled = $enabled;
 
-        return collect($urls);
-    }
+    //     return collect($urls);
+    // }
 }

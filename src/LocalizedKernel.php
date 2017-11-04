@@ -20,7 +20,7 @@ class LocalizedKernel extends Kernel
     public function localize($uri)
     {
         $_SERVER['ORIGINAL_REQUEST_URI'] = $uri;
-        $config = require_once __DIR__.'/../../config/localization.php';
+        $config = require_once __DIR__.'/../config/linguist.php';
         $pattern = '/^\/('.implode('|', $config['enabled']).')(\/|(?:$)|(?=\?))/';
 
         if (preg_match($pattern, $uri, $matches)) {
