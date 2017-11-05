@@ -27,11 +27,6 @@ class Linguist
         $this->app = $app;
     }
 
-    public function current()
-    {
-        return $this->current;
-    }
-
     public function enabled()
     {
         return $this->config['enabled'];
@@ -54,7 +49,7 @@ class Linguist
             return false;
         }
 
-        $pattern = '/^\/('.$this->current().')(\/|(?:$)|(?=\?))/';
+        $pattern = '/^\/('.$this->current.')(\/|(?:$)|(?=\?))/';
 
         return (boolean) preg_match($pattern, $this->request->server('ORIGINAL_REQUEST_URI'));
     }

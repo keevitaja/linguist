@@ -14,9 +14,4 @@ class LinguistServiceProvider extends ServiceProvider
 
         $this->mergeConfigFrom(__DIR__.'/../config/linguist.php', 'linguist');
     }
-
-    public function register()
-    {
-        $this->app->singleton(Linguist::class);
-    }
 }
