@@ -21,7 +21,6 @@ $app->singleton(
 );
 ```
 
-
 ## Usage
 
 Use `LocalizeUrls` middleware or `Linguist->localize()` in your ServiceProvider to get the localization support.
@@ -43,6 +42,12 @@ Switcher is a little helper to get the current URLs for the locale switcher.
 ```
 $urls = dispatch_now(new \Keevitaja\Linguist\Switcher);
 ```
+
+NB! Both config and route caching are working!
+
+## Queues
+
+To make localization work in queues you need to run `Linguist->localize($theLocaleYouWant)` inside the queued item.
 
 ## Configuration
 
