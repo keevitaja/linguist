@@ -1,19 +1,11 @@
 <?php
 
 return [
+    'default' => 'en',
 
-    /*
-     * i18n locale slugs
-     */
-    'locales' => ['en', 'fr', 'et'],
+    'enabled' => ['et', 'en', 'fi'],
 
-    /*
-     * Hide i18n slug for default locale
-     */
-    'hide_default' => false,
+    'hide_default' => true,
 
-    /*
-     * Default i18n locale slug
-     */
-    'default' => 'en'
+    'deny_default' => true
 ];
