@@ -7,6 +7,7 @@ use Keevitaja\Linguist\Linguist;
 
 class LocalizeUrls
 {
+    /** @var Keevitaja\Linguist\Linguist */
     protected $linguist;
 
     public function __construct(Linguist $linguist)
@@ -14,6 +15,12 @@ class LocalizeUrls
         $this->linguist = $linguist;
     }
 
+    /**
+     * @param Illuminate\Http\Request $request
+     * @param Closure $next
+     *
+     * @return Illuminate\Http\Response
+     */
     public function handle($request, Closure $next)
     {
         if ($this->linguist->hasDefaultSlug() && $this->linguist->isDefaultDenied()) {

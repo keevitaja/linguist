@@ -8,6 +8,11 @@ use Illuminate\Routing\Router;
 
 class LocalizedKernel extends Kernel
 {
+
+    /**
+     * @param Illuminate\Contracts\Foundation\Application $app
+     * @param Illuminate\Routing\Router $router
+     */
     public function __construct(Application $app, Router $router)
     {
         if (isset($_SERVER['REQUEST_URI'])) {
@@ -17,7 +22,12 @@ class LocalizedKernel extends Kernel
         parent::__construct($app, $router);
     }
 
-    public function localize($uri)
+    /**
+     * @param string $uri
+     *
+     * @return void
+     */
+    protected function localize($uri)
     {
         $_SERVER['ORIGINAL_REQUEST_URI'] = $uri;
         $config = require_once __DIR__.'/../config/linguist.php';

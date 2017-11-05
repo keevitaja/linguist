@@ -1,16 +1,18 @@
 # Linguist - Localization for Laravel
 
-ALPHA
+This package provides an easy localization support for the Laravel framework.
 
 ## Installation
+
+Linguist is very easy to use. The locale slug is removed from the REQUEST_URI leaving the developer with the cleanest multilingual environment possible.
 
 Install using Composer:
 
 ```
-composer require keevitaja/linguist dev-develop@dev
+composer require keevitaja/linguist
 ```
 
-Use `LocalizedKernel` in `bootstrap/app.php`:
+Use `LocalizedKernel` instead the one that ships with Laravel in `bootstrap/app.php`:
 
 ```php
 $app->singleton(
@@ -22,4 +24,30 @@ $app->singleton(
 
 ## Usage
 
-Use `LocalizeUrls` middleware to get the localization support.
+Use `LocalizeUrls` middleware or `Linguist->localize()` in your ServiceProvider to get the localization support.
+
+If you use the middleware make sure you set it in your web middleware stack as first item. Otherwise some redirections will not work.
+
+`UrlGenerator` will add the locale slug in front of the URI when needed. No extra actions needed.
+
+```
+Route::get('people', ['as' => 'people.index', 'uses' => ''PeopleController@index'']);
+```
+
+```
+{{ route('people.index') }} or {{ url('people') }}
+```
+
+Switcher is a little helper to get the current URLs for the locale switcher.
+
+```
+$urls = dispatch_now(new \Keevitaja\Linguist\Switcher);
+```
+
+## Configuration
+
+You can publish the `linguist.php` configuration fail where you can define which locales are enabled and the behaviour of the default locale. 
+
+## Licence
+
+MIT

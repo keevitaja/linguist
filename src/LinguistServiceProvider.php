@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 class LinguistServiceProvider extends ServiceProvider
 {
+    /**
+     * @return void
+     */
     public function boot()
     {
         $this->publishes([
