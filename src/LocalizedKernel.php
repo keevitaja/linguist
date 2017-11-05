@@ -36,9 +36,9 @@ class LocalizedKernel extends Kernel
         if (preg_match($pattern, $uri, $matches)) {
             $_SERVER['REQUEST_URI'] = preg_replace($pattern, '/', $uri);
 
-            putenv('LOCALE='.$matches[1]);
+            define('INTERCEPTED_LOCALE', $matches[1]);
         } else {
-            putenv('LOCALE='.$config['default']);
+            define('INTERCEPTED_LOCALE', $config['default']);
         }
     }
 }

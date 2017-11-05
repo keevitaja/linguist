@@ -10,9 +10,6 @@ use Illuminate\Support\Str;
 
 class Linguist
 {
-    /** @var string */
-    protected $current;
-
     /** @var array */
     protected $config;
 
@@ -27,7 +24,6 @@ class Linguist
 
     public function __construct(UrlGenerator $url, Request $request, Application $app, Config $config)
     {
-        $this->current = env('LOCALE');
         $this->config = $config->get('linguist');
         $this->url = $url;
         $this->request = $request;
@@ -49,7 +45,7 @@ class Linguist
      */
     public function localize($locale = null)
     {
-        $locale = is_null($locale) ? $this->current : $locale;
+        $locale = is_null($locale) ? INTERCEPTED_LOCALE : $locale;
 
         $this->app->setLocale($locale);
 
@@ -67,7 +63,7 @@ class Linguist
             return false;
         }
 
-        $pattern = '/^\/('.$this->current.')(\/|(?:$)|(?=\?))/';
+        $pattern = '/^\/('.$this->app->getLocale().')(\/|(?:$)|(?=\?))/';
 
         return (boolean) preg_match($pattern, $this->request->server('ORIGINAL_REQUEST_URI'));
     }
@@ -79,7 +75,7 @@ class Linguist
      */
     public function isDefault($locale = null)
     {
-        return (is_null($locale) ? $this->current : $locale) == $this->config['default'];
+        return (is_null($locale) ? $this->app->getLocale() : $locale) == $this->config['default'];
     }
 
     /**
