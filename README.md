@@ -1,6 +1,6 @@
 # Linguist - Localization for Laravel
 
-This package provides an easy localization support for the Laravel framework.
+This package provides an easy multilingual localization support for the Laravel framework.
 
 ## Installation
 
@@ -51,7 +51,7 @@ To make localization work in queues you need to run `Linguist->localize($theLoca
 
 ## Configuration
 
-You can publish the `linguist.php` configuration fail where you can define which locales are enabled and the behaviour of the default locale. 
+You can publish the `linguist.php` configuration file where you can define which locales are enabled and the behaviour of the default locale. 
 
 ## Licence
 
