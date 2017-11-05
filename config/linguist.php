@@ -7,5 +7,7 @@ return [
 
     'hide_default' => true,
 
-    'deny_default' => true
+    'deny_default' => true,
+
+    'fallback' => 'en'
 ];

@@ -45,7 +45,8 @@ class Linguist
      */
     public function localize($locale = null)
     {
-        $locale = is_null($locale) ? INTERCEPTED_LOCALE : $locale;
+        $interceptedLocale = defined('INTERCEPTED_LOCALE') ? INTERCEPTED_LOCALE : $this->config['fallback'];
+        $locale = is_null($locale) ? $interceptedLocale : $locale;
 
         $this->app->setLocale($locale);
 
