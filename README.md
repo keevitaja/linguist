@@ -37,6 +37,9 @@ Route::get('people', ['as' => 'people.index', 'uses' => ''PeopleController@index
 {{ route('people.index') }} or {{ url('people') }}
 ```
 
+You will get localized urls like `http://site.com/fr/about` and `http://site.com/about` where the last one is using the default locale.
+
+
 Switcher is a little helper to get the current URLs for the locale switcher.
 
 ```
