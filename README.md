@@ -30,7 +30,7 @@ If you use the middleware make sure you set it in your web middleware stack as f
 `UrlGenerator` will add the locale slug in front of the URI when needed. No extra actions needed.
 
 ```php
-Route::get('people', ['as' => 'people.index', 'uses' => ''PeopleController@index'']);
+Route::get('people', ['as' => 'people.index', 'uses' => 'PeopleController@index']);
 ```
 
 ```twig
