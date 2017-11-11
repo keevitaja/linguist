@@ -13,6 +13,8 @@ http://site.com/people
 http://site.com/fr/people
 ```
 
+> Linguist works perfectly well with https://github.com/tightenco/ziggy named Laravel routes for javascript package!
+
 ## Installation
 
 Linguist is very easy to use. The locale slug is removed from the REQUEST_URI leaving the developer with the cleanest multilingual environment possible.
