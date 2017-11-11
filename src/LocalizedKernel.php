@@ -5,6 +5,7 @@ namespace Keevitaja\Linguist;
 use App\Http\Kernel;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Routing\Router;
+use Keevitaja\Linguist\UriFixer;
 
 class LocalizedKernel extends Kernel
 {
@@ -15,30 +16,8 @@ class LocalizedKernel extends Kernel
      */
     public function __construct(Application $app, Router $router)
     {
-        if (isset($_SERVER['REQUEST_URI'])) {
-            $this->localize($_SERVER['REQUEST_URI']);
-        }
+        (new UriFixer)->fixit();
 
         parent::__construct($app, $router);
-    }
-
-    /**
-     * @param string $uri
-     *
-     * @return void
-     */
-    protected function localize($uri)
-    {
-        $_SERVER['ORIGINAL_REQUEST_URI'] = $uri;
-        $config = require_once __DIR__.'/../config/linguist.php';
-        $pattern = '/^\/('.implode('|', $config['enabled']).')(\/|(?:$)|(?=\?))/';
-
-        if (preg_match($pattern, $uri, $matches)) {
-            $_SERVER['REQUEST_URI'] = preg_replace($pattern, '/', $uri);
-
-            define('INTERCEPTED_LOCALE', $matches[1]);
-        } else {
-            define('INTERCEPTED_LOCALE', $config['default']);
-        }
     }
 }

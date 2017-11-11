@@ -1,6 +1,6 @@
-# Linguist - Localization for Laravel
+# Linguist - Multilingual urls and redirects for Laravel
 
-This package provides an easy multilingual localization support for the Laravel framework.
+This package provides an easy multilingual urls and redirection support for the Laravel framework.
 
 ## Installation
 
@@ -8,17 +8,96 @@ Linguist is very easy to use. The locale slug is removed from the REQUEST_URI le
 
 Install using Composer:
 
-```bash
+```
 composer require keevitaja/linguist
 ```
 
-Use `LocalizedKernel` instead the one that ships with Laravel in `bootstrap/app.php`:
+There are several options to make Linguist work.
+
+### Option 1: Modify the `public/index.php`
+
+Add following line after the vendor autoloading to your projects `public/index.php` file.
 
 ```php
+(new Keevitaja\Linguist\UriFixer)->fixit();
+```
+
+End result would be this:
+
+```php
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| our application. We just need to utilize it! We'll simply require it
+| into the script here so that we don't have to worry about manual
+| loading any of our classes later on. It feels great to relax.
+|
+*/
+
+require __DIR__.'/../vendor/autoload.php';
+
+(new Keevitaja\Linguist\UriFixer)->fixit();
+```
+
+### Option 2: Use LocalizedKernel
+
+> Note: This option works only if you have not changed your applications root namespace. Default is `App`.
+
+In your projects `bootstrap/app.php` swap the `App\Http\Kernel` with `Keevitaja\Linguist\LocalazedKernel`:
+
+```php
+/*
+|--------------------------------------------------------------------------
+| Bind Important Interfaces
+|--------------------------------------------------------------------------
+|
+| Next, we need to bind some important interfaces into the container so
+| we will be able to resolve them when needed. The kernels serve the
+| incoming requests to this application from both the web and CLI.
+|
+*/
+
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
+    //App\Http\Kernel::class
     Keevitaja\Linguist\LocalizedKernel::class
 );
+```
+
+### Option 3: modify the `App\Http\Kernel`
+
+> Note: This also works with custom root namespace. 
+
+```php
+<?php
+
+namespace App\Http;
+
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Illuminate\Routing\Router;
+use Keevitaja\Linguist\UriFixer;
+
+class Kernel extends HttpKernel
+{
+
+    public function __construct(Application $app, Router $router)
+    {
+        (new UriFixer)->fixit();
+
+        parent::__construct($app, $router);
+    }
+```
+
+### Publish config
+
+Finally you need to publish the Linguist config to set your enabled locales and default. 
+
+```
+php artisan vendor:publish --provider="Keevitaja\Linguist\LinguistServiceProvider"
 ```
 
 ## Usage
@@ -29,20 +108,17 @@ If you use the middleware make sure you set it in your web middleware stack as f
 
 `UrlGenerator` will add the locale slug in front of the URI when needed. No extra actions needed.
 
-```php
-Route::get('people', ['as' => 'people.index', 'uses' => 'PeopleController@index']);
+```
+Route::get('people', ['as' => 'people.index', 'uses' => ''PeopleController@index'']);
 ```
 
-```twig
+```
 {{ route('people.index') }} or {{ url('people') }}
 ```
 
-You will get localized urls like `http://site.com/fr/about` and `http://site.com/about` where the last one is using the default locale.
-
-
 Switcher is a little helper to get the current URLs for the locale switcher.
 
-```php
+```
 $urls = dispatch_now(new \Keevitaja\Linguist\Switcher);
 ```
 
