@@ -154,6 +154,12 @@ Route::get('people', ['as' => 'people.index', 'uses' => ''PeopleController@index
 {{ route('people.index') }} or {{ url('people') }}
 ```
 
+```
+http://site.com/people // default locale from linguist config
+http://site.com/fr/people
+http://site.com/ru/people
+```
+
 Switcher is a little helper to get the current URLs for the locale switcher.
 
 ```php
