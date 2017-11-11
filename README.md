@@ -5,7 +5,7 @@ This package provides an easy multilingual urls and redirection support for the 
 In short Laravel will generate localized urls for links and redirections.
 
 ```php
-route('about') 
+route('people') 
 ```
 
 ```
@@ -105,11 +105,13 @@ class Kernel extends HttpKernel
 
 ### Publish config
 
-Finally you need to publish the Linguist config to set your enabled locales and default. 
+Finally you need to publish the Linguist config to set your enabled locales and other relavant configurations. 
 
 ```
 php artisan vendor:publish --provider="Keevitaja\Linguist\LinguistServiceProvider"
 ```
+
+Your personal configuration file will be `config/linguist.php`.
 
 ## Usage
 
@@ -171,10 +173,6 @@ NB! Both config and route caching are working!
 ## Queues
 
 To make localization work in queues you need to run `Linguist->localize($theLocaleYouWant)` inside the queued item.
-
-## Configuration
-
-You can publish the `linguist.php` configuration file where you can define which locales are enabled and the behaviour of the default locale. 
 
 ## Licence
 
