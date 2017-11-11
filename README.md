@@ -19,7 +19,7 @@ Linguist is very easy to use. The locale slug is removed from the REQUEST_URI le
 
 Install using Composer:
 
-```
+```bash
 composer require keevitaja/linguist
 ```
 
@@ -146,17 +146,17 @@ class AppServiceProvider extends ServiceProvider
 
 `UrlGenerator` will add the locale slug in front of the URI when needed. No extra actions needed.
 
-```
+```php
 Route::get('people', ['as' => 'people.index', 'uses' => ''PeopleController@index'']);
 ```
 
-```
+```twig
 {{ route('people.index') }} or {{ url('people') }}
 ```
 
 Switcher is a little helper to get the current URLs for the locale switcher.
 
-```
+```php
 $urls = dispatch_now(new \Keevitaja\Linguist\Switcher);
 ```
 
