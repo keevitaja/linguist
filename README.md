@@ -1,6 +1,17 @@
 # Linguist - Multilingual urls and redirects for Laravel
 
-This package provides an easy multilingual urls and redirection support for the Laravel framework.
+This package provides an easy multilingual urls and redirection support for the Laravel framework. 
+
+In short Laravel will generate localized urls for links and redirections.
+
+```php
+route('about') 
+```
+
+```
+http://site.com/people
+http://site.com/fr/people
+```
 
 ## Installation
 
@@ -102,9 +113,36 @@ php artisan vendor:publish --provider="Keevitaja\Linguist\LinguistServiceProvide
 
 ## Usage
 
-Use `LocalizeUrls` middleware or `Linguist->localize()` in your ServiceProvider to get the localization support.
+You can add the LocalizeUrls middleware your web middleware group as the first item to get the linguist support:
 
-If you use the middleware make sure you set it in your web middleware stack as first item. Otherwise some redirections will not work.
+```php
+/**
+ * The application's route middleware groups.
+ *
+ * @var array
+ */
+protected $middlewareGroups = [
+    'web' => [
+        \Keevitaja\Linguist\LocalizeUrls::class,
+```
+
+> Note: This middleware has to be the first item in group!
+
+Another option is to use Linguist in your applications service provider:
+
+```php
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot(\Keevitaja\Linguist\Linguist $linguist)
+    {
+        $linguist->localize();
+    }
+```
 
 `UrlGenerator` will add the locale slug in front of the URI when needed. No extra actions needed.
 
