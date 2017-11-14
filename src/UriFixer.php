@@ -48,11 +48,11 @@ class UriFixer
      */
     protected function getConfig()
     {
-        $config = require_once __DIR__.'/../config/linguist.php';
+        $config = include __DIR__.'/../config/linguist.php';
         $publishedConfig = __DIR__.'/../../../../config/linguist.php';
 
         if (file_exists($publishedConfig)) {
-            $published = require_once $publishedConfig;
+            $published = include $publishedConfig;
 
             return array_merge($config, $published);
         }
