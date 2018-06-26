@@ -172,6 +172,24 @@ $urls = dispatch_now(new \Keevitaja\Linguist\Switcher);
 
 NB! Both config and route caching are working!
 
+## Assets
+
+Use linguist helpers for a correct routing of assets
+
+**Regular Assets**
+ 
+ ```twig
+ <link rel="stylesheet" href="{{ linguist_asset('css/style.css') }}">
+ <script type="text/javascript" src="{{ linguist_asset('js/my_js.js') }}"></script>
+ ```
+ 
+ **Secure Assets**
+ 
+ ```twig
+ <link rel="stylesheet" href="{{ secure_linguist_asset('css/style.css') }}">
+ <script type="text/javascript" src="{{ secure_linguist_asset('js/my_js.js') }}"></script>
+```
+
 ## Queues
 
 To make localization work in queues you need to run `Linguist->localize($theLocaleYouWant)` inside the queued item.
